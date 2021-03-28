@@ -24,8 +24,9 @@ Route::get('/', function () {
 // Route::get('/perritos/edit', [PerritosController::class, 'edit']);
 
 //Mostrar todas las rutas
-Route::resource('perritos', PerritosController::class);
-Auth::routes(['register' => false, 'reset' => false]);
+Route::resource('perritos', PerritosController::class)->middleware('auth'); //Con middleware auth impide el acceso a las rutas si no se está logeado
+Auth::routes(['reset' => false]);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+//Redireccion al index de perritos una vez está logeado
+Route::get('/home', [App\Http\Controllers\PerritosController::class, 'index'])->name('home');
 

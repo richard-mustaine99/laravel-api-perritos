@@ -16,7 +16,8 @@ class PerritosController extends Controller
     public function index()
     {
         //
-        $data['perritos']=Perritos::paginate(5);
+        //Paginación
+        $data['perritos'] = Perritos::paginate(5);
 
 
         return view('perritos.index', $data);
@@ -42,6 +43,17 @@ class PerritosController extends Controller
     public function store(Request $request)
     {
         //
+
+        //Validaciones de datos
+        $campos=[
+            'Nombre' => 'required|string|max:50',
+            'Color' => 'required|string|max:50',
+            'Raza' => 'required|string|max:50',
+            'Foto' => 'required|max:10000|mimes:jpeg,jpg,png',
+        ];
+
+        $mensaje=["required" => 'El campo de :attribute es requerido'];
+        $this->validate($request, $campos, $mensaje);
 
         // $dataPerritos=request()->all();
         $dataPerritos=request()->except('_token');
@@ -92,6 +104,24 @@ class PerritosController extends Controller
     public function update(Request $request, $id)
     {
         //
+        //Validaciones de datos
+        $campos=[
+            'Nombre' => 'required|string|max:50',
+            'Color' => 'required|string|max:50',
+            'Raza' => 'required|string|max:50',
+            
+        ];
+
+        //Validacion de foto
+        if($request->hasFile('Foto')){
+
+            $campos += ['Foto' => 'required|max:10000|mimes:jpeg,jpg,png'];
+
+        }
+
+        $mensaje=["required" => 'El campo de :attribute es requerido'];
+        $this->validate($request, $campos, $mensaje);
+
         $dataPerritos=request()->except(['_token', '_method']);
 
         //Reemplazar la foto

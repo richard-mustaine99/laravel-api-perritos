@@ -4,13 +4,16 @@
 
 <div class="container">
 
-    @if(Session::has('Mensaje')){{
-        Session::get('Mensaje')
-    }}
+    @if(Session::has('Mensaje'))
+    <div class="alert alert-success" role="alert">
+        {{ Session::get('Mensaje') }}
+    </div>
     @endif
 
-    <a href="{{ url('perritos/create') }}">Agregar perrito</a>
-    <table class="table table-dark">
+    <a href="{{ url('perritos/create') }}" class="btn btn-success">Agregar perrito</a>
+    <br><br>
+    
+    <table class="table table-light table-hover">
         <thead class="thead-light">
             <tr>
                 <th>#</th>
@@ -26,21 +29,21 @@
             <tr>
                 <td>{{$loop->iteration}}</td>
                 <td>
-                    <img src="{{ asset('storage'). '/'. $perrito->Foto}}" alt="" width="100">
+                    <img src="{{ asset('storage'). '/'. $perrito->Foto}}" class="img-thumbnail img-fluid" alt="" width="100">
                 </td>
                 <td>{{$perrito->Nombre}}</td>
                 <td>{{$perrito->Color}}</td>
                 <td>{{$perrito->Raza}}</td>
                 <td>
                     
-                <a href="{{ url('/perritos/'.$perrito->id.'/edit')}}">
+                <a href="{{ url('/perritos/'.$perrito->id.'/edit')}}" class="btn btn-primary">
                     Editar
                 </a>
 
-                <form method="post" action="{{ url('/perritos/'.$perrito->id) }}">
+                <form method="post" action="{{ url('/perritos/'.$perrito->id) }}" style="display:inline;">
                     {{csrf_field()}}
                     {{ method_field('DELETE') }}
-                    <button type="submit" onclick="return confirm('Desea borrar el registro?')">Eliminar</button>
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Desea borrar el registro?')">Eliminar</button>
                 </form>
                 
                 </td>
@@ -48,5 +51,8 @@
         @endforeach
         </tbody>
     </table>
+
+    {{ $perritos->links() }}
+    
 </div>
 @endsection
