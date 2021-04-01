@@ -19,6 +19,6 @@ DB_PASSWORD=
 
 - Por ultimo, ejecutar las migrations de las tablas con el siguiente comando:
 
-php artisan migrate
+        php artisan migrate
 
 - Listo! Con eso ya deberia ser capaz de poder ejecutar el CRUD con Laravel!
