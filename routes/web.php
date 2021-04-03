@@ -28,5 +28,5 @@ Route::resource('perritos', PerritosController::class)->middleware('auth'); //Co
 Auth::routes(['reset' => false]);
 
 //Redireccion al index de perritos una vez está logeado
-Route::get('/home', [App\Http\Controllers\PerritosController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\PerritosController::class, 'index'])->name('home');
 
