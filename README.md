@@ -17,12 +17,16 @@ DB_DATABASE=adndigital
 DB_USERNAME=root
 DB_PASSWORD=
 
-- Por ultimo, ejecutar las migrations de las tablas con el siguiente comando:
+- Una vez hecho esto, se ejecutar las migrations de las tablas con el siguiente comando:
 
         php artisan migrate
         
 - En caso de pedir key de encriptación, se debe ejecutar el siguiente comando:
         
         php artisan key:generate
+        
+ - Por ultimo, se debe linkear el storage con el proyecto para poder guardar correctamente las fotos, esto se realiza con el siguiente comando:
+        
+        php artisan storage:link
 
 - Listo! Con eso ya deberia ser capaz de poder ejecutar el CRUD con Laravel!
